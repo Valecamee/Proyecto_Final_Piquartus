@@ -24,3 +24,6 @@ light_intensity = grovepi.analogRead(light_sensor)
 [ temp,hum ] = dht(dht_sensor_port,dht_sensor_type)
 print("temp =", temp, "C\thumidity =", hum,"%")
 print(p)
+
+ if isnan(temp) is True or isnan(hum) is True:
+            raise TypeError('nan error')
