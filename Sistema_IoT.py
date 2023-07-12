@@ -9,9 +9,11 @@ import datetime
 
 
 button = 2
+potentiometer = 2
+light_sensor = 1
 dht_sensor_port = 3
 dht_sensor_type = 0 
-light_sensor = 1
+
 
 grovepi.pinMode(potentiometer,"INPUT")
 #data = []
@@ -61,4 +63,11 @@ while True:
         # and since we got a type error
         # then reset the LCD's text
         setText("")
+        
+    except KeyboardInterrupt as e:
+        print(str(e))
+        # since we're exiting the program
+        # it's better to leave the LCD with a blank text
+        setText("")
         break
+    sleep(0.5)# wait some time before re-updating the LCD
