@@ -27,3 +27,18 @@ print(p)
 
 if isnan(temp) is True or isnan(hum) is True:
             raise TypeError('nan error')
+        
+t = str(temp)
+h = str(hum)
+l = str(light_intensity)
+pt = str(p)
+
+if button_status:
+            
+    setText_norefresh("Temp:" + t + "C\n" + "Humidity:" + h + "%")
+    sleep(0.5)
+else:
+    setText_norefresh("light:" + l + "\n" + "Time:" + pt +"s")
+    sleep(0.5)
+            
+    filename = "tabla.csv"
