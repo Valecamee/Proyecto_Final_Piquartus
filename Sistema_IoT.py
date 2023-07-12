@@ -52,10 +52,10 @@ while True:
             filename = "tabla.csv"
             
         with open(filename, mode = "a") as file:
-                    writer = csv.writer(file)
+            writer = csv.writer(file)
                 
-                    writer.writerow([formatted_date,t,h,l])
-                    time.sleep(p)
+            writer.writerow([formatted_date,t,h,l])
+            time.sleep(p)
         print("Datos guardados en ", filename)
         
     except (IOError, TypeError) as e:
