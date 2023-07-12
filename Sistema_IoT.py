@@ -48,4 +48,4 @@ with open(filename, mode = "a") as file:
         
             writer.writerow([formatted_date,t,h,l])
             time.sleep(p)
-        print("Datos guardados en ", filename)
+print("Datos guardados en ", filename)
