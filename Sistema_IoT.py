@@ -27,8 +27,7 @@ while True:
                 
         button_status = digitalRead(button)
         light_intensity = grovepi.analogRead(light_sensor)
-        # check if we have nans
-        # if so, then raise a type error exception
+        
         [ temp,hum ] = dht(dht_sensor_port,dht_sensor_type)
         print("temp =", temp, "C\thumidity =", hum,"%")
         print(p)
