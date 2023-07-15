@@ -16,6 +16,8 @@ def collect_sensor_data():
     
     grovepi.pinMode(potentiometer,"INPUT")
     
+    data = []  # Lista para almacenar los datos recopilados
+    
     while True:
         try:
             p = int(grovepi.analogRead(potentiometer)/204.5)
@@ -52,6 +54,9 @@ def collect_sensor_data():
                 time.sleep(p)
             print("Datos guardados en", filename)
             
+            # Agregar los datos recopilados a la lista
+            data.append((formatted_date, temp, hum, light_intensity))
+            
         except (IOError, TypeError) as e:
             print(str(e))
             setText("")
@@ -61,3 +66,5 @@ def collect_sensor_data():
             setText("")
             break
         sleep(0.5)
+    
+    return data

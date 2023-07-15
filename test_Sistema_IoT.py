@@ -3,20 +3,18 @@ from unittest.mock import MagicMock, patch
 from grovepi import *
 from Sistema_IoT import *
 
-# Mocking the necessary functions and dependencies
-
 @pytest.fixture(autouse=True)
 def mock_dependencies():
-    # Mocking the grovepi functions
-    patch_analogRead = patch('your_module.grovepi.analogRead', MagicMock(return_value=500))
-    patch_digitalRead = patch('your_module.digitalRead', MagicMock(return_value=1))
-    patch_dht = patch('your_module.dht', MagicMock(return_value=[25, 50]))  # Mocking temperature and humidity values
+
+    patch_analogRead = patch('grovepi.analogRead', MagicMock(return_value=500))
+    patch_digitalRead = patch('digitalRead', MagicMock(return_value=1))
+    patch_dht = patch('dht', MagicMock(return_value=[25, 50]))  # Mocking temperature and humidity values
     with patch_analogRead, patch_digitalRead, patch_dht:
         yield
 
 def test_button_status():
     # Call the function you want to test
-    result = your_function_name()
+    result = collect_sensor_data()
 
     # Perform assertions to check the expected behavior
     assert result == expected_result
