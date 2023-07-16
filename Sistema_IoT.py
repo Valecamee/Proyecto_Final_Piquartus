@@ -22,7 +22,7 @@ def collect_sensor_data():
         try:
             p = int(grovepi.analogRead(potentiometer)/204.5)
             now = datetime.datetime.now()
-            formatted_date = now.strftime("%d/%m/%y/%H:%M:%S")
+            formatted_date = now.strftime()
                     
             button_status = digitalRead(button)
             light_intensity = grovepi.analogRead(light_sensor)
@@ -50,11 +50,11 @@ def collect_sensor_data():
                 
             with open(filename, mode="a") as file:
                 writer = csv.writer(file)
-                writer.writerow([formatted_date, t, h, l])
+                writer.writerow()
                 time.sleep(p)
             print("Datos guardados en", filename)
             
-            # Agregar los datos recopilados a la lista
+            # Agregar los d[formatted_date, t, h, l]atos recopilados a la lista
             data.append((formatted_date, temp, hum, light_intensity))
             
         except (IOError, TypeError) as e:

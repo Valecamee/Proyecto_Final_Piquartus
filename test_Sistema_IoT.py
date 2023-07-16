@@ -1,28 +1,20 @@
-import pytest
-from unittest.mock import MagicMock, patch
-from grovepi import *
+import re
+import pytest 
 from Sistema_IoT import *
 
-@pytest.fixture(autouse=True)
-def mock_dependencies():
+def test_collect_sensor_data():
+    resultado1 = Sistema_IoT.collect_sensor_data()
 
-    patch_analogRead = patch('grovepi.analogRead', MagicMock(return_value=500))
-    patch_digitalRead = patch('digitalRead', MagicMock(return_value=1))
-    patch_dht = patch('dht', MagicMock(return_value=[25, 50]))  # Mocking temperature and humidity values
-    with patch_analogRead, patch_digitalRead, patch_dht:
-        yield
+    assert isinstance(resultado1, list), "El resultado no es una lista"
 
-def test_button_status():
-    # Call the function you want to test
-    result = collect_sensor_data()
+    if resultado1:  # Verificar si la lista no está vacía
+        assert isinstance(resultado1[0], str), "El valor 'formatted_date' no es una cadena"
 
-    # Perform assertions to check the expected behavior
-    assert result == expected_result
+        # Verificar el formato de fecha y hora usando una expresión regular
+        formato_esperado = r"\d{1,2}/\d{1,2}/\d{4}/\d{1,2}:\d{1,2}:\d{1,2}"
+        assert re.match(formato_esperado, resultado1[0]), "El valor 'formatted_date' no tiene el formato esperado"
 
-    # Check if the mocked functions were called with the expected arguments
-    grovepi.digitalRead.assert_called_once_with(button)
-
-# Add more test cases for other functions or scenarios
+        assert all(isinstance(valor, (int, float)) for valor in resultado1[1:4]), "Los valores 'temp', 'hum' y 'light_intensity' no son números"
 
 if __name__ == '__main__':
-    pytest.main()
+  test_collect_sensor_data()
